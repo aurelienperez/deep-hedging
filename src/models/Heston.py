@@ -19,6 +19,7 @@ class Heston():
                            theta = theta, sigma = sigma, rho = rho)
         self.g = g
     
+
     def generate_trajectories(self, S0, T, N, n_paths, in_torch = False):
         if in_torch:
             if np.isscalar(S0):
@@ -31,6 +32,7 @@ class Heston():
                 d = len(S0)
                 return heston_multid_torch(S0, T, N, n_paths, self.params, d,
                              self.g)
+
         else:
             if np.isscalar(S0):
                 return heston_1d(S0, T, N, n_paths, self.params,
@@ -66,7 +68,7 @@ def heston_1d(S0, T, N, n_paths, params,
         S[i+1] = S[i] + params["r"] * S[i] * dt +\
             np.sqrt(v[i] * dt) * S[i] * (params["rho"] * G[i,:,0] + np.sqrt(1 - params["rho"]**2) * G[i,:,1])
             
-    return S
+    return S[:,:,None]
 
 def heston_multid(S0, T, N, n_paths, params, d,
              g = np.abs, rng = default_rng()):

@@ -19,7 +19,9 @@ class BS():
 
         self.params = dict(r = r, sigma = sigma, rho = rho)
     
+
     def generate_trajectories(self, S0, T, N, n_paths, in_torch = False):
+      
         if in_torch:
             if np.isscalar(S0):
                 return bs_1d_torch(S0, T, N, n_paths, self.params)
@@ -28,6 +30,7 @@ class BS():
             else:
                 d = len(S0)
                 return bs_multid_torch(S0, T, N, n_paths, self.params, d)    
+
         else:
             if np.isscalar(S0):
                 return bs_1d(S0, T, N, n_paths, self.params)
