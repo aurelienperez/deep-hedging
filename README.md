@@ -13,8 +13,6 @@ The goal is to evaluate the performance of data-driven hedging under realistic m
 
 - `src/`: simulation and strategy code
 - `notebooks/`: result visualisations
-- `results/`: plots
-- `main.py`: training and evaluation script
-- `requirements.txt`: dependencies
+
 
 
